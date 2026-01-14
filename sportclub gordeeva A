@@ -1,0 +1,1162 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMHCkR64+yYWatgu09DsgCJ",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/gordiygordeevvva-oss/sport-club-system/blob/main/sportclub%20gordeeva%20A\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/sport_club\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "JfIp3vIjT7AB",
+        "outputId": "bafb0916-5499-4adb-8a93-c681e828a0f4"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/sport_club\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!python manage.py runserver 0.0.0.0:8000\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "XYWVE_dST_Fo",
+        "outputId": "212a482f-e1b3-46d0-b7a8-d5e644cdb8a5"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Traceback (most recent call last):\n",
+            "  File \"/content/sport_club/manage.py\", line 22, in <module>\n",
+            "    main()\n",
+            "  File \"/content/sport_club/manage.py\", line 18, in main\n",
+            "    execute_from_command_line(sys.argv)\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/__init__.py\", line 443, in execute_from_command_line\n",
+            "    utility.execute()\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/__init__.py\", line 383, in execute\n",
+            "    settings.INSTALLED_APPS\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/conf/__init__.py\", line 75, in __getattr__\n",
+            "    self._setup(name)\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/conf/__init__.py\", line 62, in _setup\n",
+            "    self._wrapped = Settings(settings_module)\n",
+            "                    ^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/conf/__init__.py\", line 162, in __init__\n",
+            "    mod = importlib.import_module(self.SETTINGS_MODULE)\n",
+            "          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+            "  File \"/usr/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n",
+            "    return _bootstrap._gcd_import(name[level:], package, level)\n",
+            "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+            "  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n",
+            "  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n",
+            "  File \"<frozen importlib._bootstrap>\", line 1331, in _find_and_load_unlocked\n",
+            "  File \"<frozen importlib._bootstrap>\", line 935, in _load_unlocked\n",
+            "  File \"<frozen importlib._bootstrap_external>\", line 995, in exec_module\n",
+            "  File \"<frozen importlib._bootstrap_external>\", line 1133, in get_code\n",
+            "  File \"<frozen importlib._bootstrap_external>\", line 1063, in source_to_code\n",
+            "  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n",
+            "  File \"/content/sport_club/sport_club/settings.py\", line 34\n",
+            "    INSTALLED_APPS = [\n",
+            "    ^^^^^^^^^^^^^^^^^^\n",
+            "SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!python manage.py makemigrations\n",
+        "!python manage.py migrate\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RnwcDYdiUhMD",
+        "outputId": "f52dce68-f15d-4cdf-bdc2-21c848de5abf"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[36;1mMigrations for 'app1':\u001b[0m\n",
+            "  \u001b[1mapp1/migrations/0001_initial.py\u001b[0m\n",
+            "    + Create model Schedule\n",
+            "    + Create model User\n",
+            "    + Create model Booking\n",
+            "    + Create model Trainer\n",
+            "    + Add field trainer to schedule\n",
+            "\u001b[36;1mOperations to perform:\u001b[0m\n",
+            "\u001b[1m  Apply all migrations: \u001b[0madmin, app1, auth, contenttypes, sessions\n",
+            "\u001b[36;1mRunning migrations:\u001b[0m\n",
+            "  Applying contenttypes.0001_initial...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying contenttypes.0002_remove_content_type_name...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0001_initial...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0002_alter_permission_name_max_length...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0003_alter_user_email_max_length...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0004_alter_user_username_opts...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0005_alter_user_last_login_null...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0006_require_contenttypes_0002...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0007_alter_validators_add_error_messages...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0008_alter_user_username_max_length...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0009_alter_user_last_name_max_length...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0010_alter_group_name_max_length...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0011_update_proxy_permissions...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying auth.0012_alter_user_first_name_max_length...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying app1.0001_initial...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying admin.0001_initial...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying admin.0002_logentry_remove_auto_add...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying admin.0003_logentry_add_action_flag_choices...\u001b[32;1m OK\u001b[0m\n",
+            "  Applying sessions.0001_initial...\u001b[32;1m OK\u001b[0m\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!python manage.py runserver 0.0.0.0:8000\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ZhYppPrOU9GT",
+        "outputId": "b1f98401-dd81-4519-f4af-81a9e40af5b2"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Watching for file changes with StatReloader\n",
+            "Performing system checks...\n",
+            "\n",
+            "System check identified no issues (0 silenced).\n",
+            "January 15, 2026 - 00:05:28\n",
+            "Django version 6.0.1, using settings 'sport_club.settings'\n",
+            "Starting development server at http://0.0.0.0:8000/\n",
+            "Quit the server with CONTROL-C.\n",
+            "\n",
+            "\u001b[33;1mWARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.\n",
+            "For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/\u001b[0m\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!nohup python manage.py runserver 0.0.0.0:8000 &\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "bjoywsE5aHsA",
+        "outputId": "5b3a5f0b-c1a7-4e3f-970b-3126b5a2964a"
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "nohup: appending output to 'nohup.out'\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/sport_club\n",
+        "!python manage.py runserver 0.0.0.0:8000 --noreload\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "MVDAfNagc85v",
+        "outputId": "25366c4a-8be0-42c6-9436-4adf5c5c5311"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/sport_club\n",
+            "Performing system checks...\n",
+            "\n",
+            "System check identified no issues (0 silenced).\n",
+            "January 15, 2026 - 00:46:25\n",
+            "Django version 6.0.1, using settings 'sport_club.settings'\n",
+            "Starting development server at http://0.0.0.0:8000/\n",
+            "Quit the server with CONTROL-C.\n",
+            "\n",
+            "\u001b[33;1mWARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.\n",
+            "For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/\u001b[0m\n",
+            "Traceback (most recent call last):\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/commands/runserver.py\", line 144, in inner_run\n",
+            "    run(\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/servers/basehttp.py\", line 277, in run\n",
+            "    httpd.serve_forever()\n",
+            "  File \"/usr/lib/python3.12/socketserver.py\", line 235, in serve_forever\n",
+            "    ready = selector.select(poll_interval)\n",
+            "            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+            "  File \"/usr/lib/python3.12/selectors.py\", line 415, in select\n",
+            "    fd_event_list = self._selector.poll(timeout)\n",
+            "                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+            "KeyboardInterrupt\n",
+            "\n",
+            "During handling of the above exception, another exception occurred:\n",
+            "\n",
+            "Traceback (most recent call last):\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/base.py\", line 420, in run_from_argv\n",
+            "    self.execute(*args, **cmd_options)\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/commands/runserver.py\", line 69, in execute\n",
+            "    super().execute(*args, **options)\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/base.py\", line 464, in execute\n",
+            "    output = self.handle(*args, **options)\n",
+            "             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/commands/runserver.py\", line 110, in handle\n",
+            "    self.run(**options)\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/commands/runserver.py\", line 119, in run\n",
+            "    self.inner_run(None, **options)\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/commands/runserver.py\", line 170, in inner_run\n",
+            "    sys.exit(0)\n",
+            "SystemExit: 0\n",
+            "\n",
+            "During handling of the above exception, another exception occurred:\n",
+            "\n",
+            "Traceback (most recent call last):\n",
+            "  File \"/content/sport_club/manage.py\", line 22, in <module>\n",
+            "    main()\n",
+            "  File \"/content/sport_club/manage.py\", line 18, in main\n",
+            "    execute_from_command_line(sys.argv)\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/__init__.py\", line 443, in execute_from_command_line\n",
+            "    utility.execute()\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/__init__.py\", line 437, in execute\n",
+            "    self.fetch_command(subcommand).run_from_argv(self.argv)\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/core/management/base.py\", line 433, in run_from_argv\n",
+            "    connections.close_all()\n",
+            "  File \"/usr/local/lib/python3.12/dist-packages/django/utils/connection.py\", line 83, in close_all\n",
+            "    def close_all(self):\n",
+            "\n",
+            "KeyboardInterrupt\n",
+            "^C\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/sport_club\n",
+        "!python manage.py runserver 0.0.0.0:8000 --noreload\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "C9krga1iez6q",
+        "outputId": "be575280-b554-4b65-f429-86c1e9340f40"
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/sport_club\n",
+            "Performing system checks...\n",
+            "\n",
+            "System check identified no issues (0 silenced).\n",
+            "January 15, 2026 - 00:48:37\n",
+            "Django version 6.0.1, using settings 'sport_club.settings'\n",
+            "Starting development server at http://0.0.0.0:8000/\n",
+            "Quit the server with CONTROL-C.\n",
+            "\n",
+            "\u001b[33;1mWARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.\n",
+            "For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/\u001b[0m\n",
+            "Exception ignored in atexit callback: <bound method finalize._exitfunc of <class 'weakref.finalize'>>\n",
+            "Traceback (most recent call last):\n",
+            "  File \"/usr/lib/python3.12/weakref.py\", line 641, in _exitfunc\n",
+            "    @classmethod\n",
+            "\n",
+            "KeyboardInterrupt: \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!./cloudflared-linux-amd64 tunnel --url http://127.0.0.1:8000\n",
+        "\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "soFBUVGVe_eE",
+        "outputId": "e0e02696-8160-48ea-8ea5-4f4d743c6b3b"
+      },
+      "execution_count": 2,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\u001b[90m2026-01-14T21:49:36Z\u001b[0m \u001b[32mINF\u001b[0m Thank you for trying Cloudflare Tunnel. Doing so, without a Cloudflare account, is a quick way to experiment and try it out. However, be aware that these account-less Tunnels have no uptime guarantee, are subject to the Cloudflare Online Services Terms of Use (https://www.cloudflare.com/website-terms/), and Cloudflare reserves the right to investigate your use of Tunnels for violations of such terms. If you intend to use Tunnels in production you should use a pre-created named tunnel by following: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps\n",
+            "\u001b[90m2026-01-14T21:49:36Z\u001b[0m \u001b[32mINF\u001b[0m Requesting new quick Tunnel on trycloudflare.com...\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m +--------------------------------------------------------------------------------------------+\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m |  Your quick Tunnel has been created! Visit it at (it may take some time to be reachable):  |\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m |  https://carpet-commons-end-usr.trycloudflare.com                                          |\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m +--------------------------------------------------------------------------------------------+\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m Version 2025.11.1 (Checksum 991dffd8889ee9f0147b6b48933da9e4407e68ea8c6d984f55fa2d3db4bb431d)\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m GOOS: linux, GOVersion: go1.24.9, GoArch: amd64\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m Settings: map[ha-connections:1 protocol:quic url:http://127.0.0.1:8000]\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m cloudflared will not automatically update when run from the shell. To enable auto-updates, run cloudflared as a service: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/configure-tunnels/local-management/as-a-service/\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m Generated Connector ID: 9120f968-ab6f-4f2c-b600-95ae88de085b\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m Initial protocol quic\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m ICMP proxy will use 172.28.0.12 as source for IPv4\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m ICMP proxy will use ::1 in zone lo as source for IPv6\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[1m\u001b[31mERR\u001b[0m\u001b[0m Cannot determine default origin certificate path. No file cert.pem in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp /etc/cloudflared /usr/local/etc/cloudflared]. You need to specify the origin certificate path by specifying the origincert option in the configuration file, or set TUNNEL_ORIGIN_CERT environment variable \u001b[36moriginCertPath=\u001b[0m\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m ICMP proxy will use 172.28.0.12 as source for IPv4\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m ICMP proxy will use ::1 in zone lo as source for IPv6\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m Starting metrics server on 127.0.0.1:20241/metrics\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] \u001b[36mconnIndex=\u001b[0m0 \u001b[36mevent=\u001b[0m0 \u001b[36mip=\u001b[0m198.41.200.33\n",
+            "2026/01/14 21:49:39 failed to sufficiently increase receive buffer size (was: 208 kiB, wanted: 7168 kiB, got: 416 kiB). See https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes for details.\n",
+            "\u001b[90m2026-01-14T21:49:39Z\u001b[0m \u001b[32mINF\u001b[0m Registered tunnel connection \u001b[36mconnIndex=\u001b[0m0 \u001b[36mconnection=\u001b[0m8764073a-8c55-4a83-a1ea-9f943c3881a7 \u001b[36mevent=\u001b[0m0 \u001b[36mip=\u001b[0m198.41.200.33 \u001b[36mlocation=\u001b[0matl14 \u001b[36mprotocol=\u001b[0mquic\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[32mINF\u001b[0m Initiating graceful shutdown due to signal interrupt ...\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[1m\u001b[31mERR\u001b[0m\u001b[0m failed to run the datagram handler \u001b[31merror=\u001b[0m\u001b[31m\"context canceled\"\u001b[0m \u001b[36mconnIndex=\u001b[0m0 \u001b[36mevent=\u001b[0m0 \u001b[36mip=\u001b[0m198.41.200.33\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[1m\u001b[31mERR\u001b[0m\u001b[0m failed to serve tunnel connection \u001b[31merror=\u001b[0m\u001b[31m\"accept stream listener encountered a failure while serving\"\u001b[0m \u001b[36mconnIndex=\u001b[0m0 \u001b[36mevent=\u001b[0m0 \u001b[36mip=\u001b[0m198.41.200.33\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[1m\u001b[31mERR\u001b[0m\u001b[0m Serve tunnel error \u001b[31merror=\u001b[0m\u001b[31m\"accept stream listener encountered a failure while serving\"\u001b[0m \u001b[36mconnIndex=\u001b[0m0 \u001b[36mevent=\u001b[0m0 \u001b[36mip=\u001b[0m198.41.200.33\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[32mINF\u001b[0m Retrying connection in up to 1s \u001b[36mconnIndex=\u001b[0m0 \u001b[36mevent=\u001b[0m0 \u001b[36mip=\u001b[0m198.41.200.33\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[1m\u001b[31mERR\u001b[0m\u001b[0m Connection terminated \u001b[36mconnIndex=\u001b[0m0\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[1m\u001b[31mERR\u001b[0m\u001b[0m no more connections active and exiting\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[32mINF\u001b[0m Tunnel server stopped\n",
+            "\u001b[90m2026-01-14T21:52:14Z\u001b[0m \u001b[32mINF\u001b[0m Metrics server stopped\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!ls /content/sport_club\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "5vjTAXPog4qi",
+        "outputId": "1cd55e2f-eb6c-4559-a421-c04767fdc1a3"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "app1\t\t\t cloudflared-linux-amd64.1  manage.py\n",
+            "cloudflared-linux-amd64  db.sqlite3\t\t    sport_club\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/sport_club/app1\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "j4MMH-dIhEAm",
+        "outputId": "c87f3ec8-f433-4f81-aaf2-0459cb98b607"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/sport_club/app1\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%writefile serializers.py\n",
+        "from rest_framework import serializers\n",
+        "from .models import User, Trainer, Schedule, Booking\n",
+        "\n",
+        "\n",
+        "class UserSerializer(serializers.ModelSerializer):\n",
+        "    class Meta:\n",
+        "        model = User\n",
+        "        fields = ['id', 'username', 'email', 'role']\n",
+        "\n",
+        "\n",
+        "class TrainerSerializer(serializers.ModelSerializer):\n",
+        "    user = UserSerializer(read_only=True)\n",
+        "\n",
+        "    class Meta:\n",
+        "        model = Trainer\n",
+        "        fields = ['id', 'user', 'specialization', 'experience_years']\n",
+        "\n",
+        "\n",
+        "class ScheduleSerializer(serializers.ModelSerializer):\n",
+        "    trainer = TrainerSerializer(read_only=True)\n",
+        "\n",
+        "    class Meta:\n",
+        "        model = Schedule\n",
+        "        fields = ['id', 'trainer', 'date', 'time']\n",
+        "\n",
+        "\n",
+        "class BookingSerializer(serializers.ModelSerializer):\n",
+        "    client = UserSerializer(read_only=True)\n",
+        "    schedule = ScheduleSerializer(read_only=True)\n",
+        "\n",
+        "    class Meta:\n",
+        "        model = Booking\n",
+        "        fields = ['id', 'client', 'schedule', 'created_at']\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "aLnP9WRvhJJg",
+        "outputId": "1d34cfdd-5a2e-43b1-d0fa-19587c314116"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Writing serializers.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!ls\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "aghtVvFJhayP",
+        "outputId": "6509915e-4899-4780-e1a6-8d55092cd30e"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "admin.py  __init__.py  models.py    serializers.py  views.py\n",
+            "apps.py   migrations   __pycache__  tests.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!ls /content/sport_club/app1\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "yOR9xd7_iBs2",
+        "outputId": "511c3b30-6468-4fad-9ddb-9544530bd97a"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "admin.py  __init__.py  models.py    serializers.py  views.py\n",
+            "apps.py   migrations   __pycache__  tests.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%%writefile /content/sport_club/app1/urls.py\n",
+        "from django.urls import path, include\n",
+        "from rest_framework.routers import DefaultRouter\n",
+        "from .views import UserViewSet, TrainerViewSet, ScheduleViewSet, BookingViewSet\n",
+        "\n",
+        "router = DefaultRouter()\n",
+        "router.register(r'users', UserViewSet)\n",
+        "router.register(r'trainers', TrainerViewSet)\n",
+        "router.register(r'schedules', ScheduleViewSet)\n",
+        "router.register(r'bookings', BookingViewSet)\n",
+        "\n",
+        "urlpatterns = [\n",
+        "    path('', include(router.urls)),\n",
+        "]\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "T5WEA3cfiGFc",
+        "outputId": "9b70e6ef-7a79-4e9d-d907-bf528b234dc7"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Writing /content/sport_club/app1/urls.py\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/sport_club\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "iedsQ-EEjpL0",
+        "outputId": "aea14413-c89c-43db-ed84-18d386faabef"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/sport_club\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!python manage.py runserver\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8nSiy2pljvMt",
+        "outputId": "09630d56-7883-4e2a-fe9d-662473a72ec0"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Watching for file changes with StatReloader\n",
+            "Performing system checks...\n",
+            "\n",
+            "System check identified no issues (0 silenced).\n",
+            "January 15, 2026 - 01:10:00\n",
+            "Django version 6.0.1, using settings 'sport_club.settings'\n",
+            "Starting development server at http://127.0.0.1:8000/\n",
+            "Quit the server with CONTROL-C.\n",
+            "\n",
+            "\u001b[33;1mWARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.\n",
+            "For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/\u001b[0m\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/sport_club\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "j0AOrJ2JkMxj",
+        "outputId": "2563ecd1-e1d1-48be-a8a3-84ee9ee4afa8"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/sport_club\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!python manage.py runserver\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "1mgJrU88kPct",
+        "outputId": "5bf20f6d-40fc-48a1-9078-1a80b39953ef"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Watching for file changes with StatReloader\n",
+            "Performing system checks...\n",
+            "\n",
+            "System check identified no issues (0 silenced).\n",
+            "January 15, 2026 - 01:15:12\n",
+            "Django version 6.0.1, using settings 'sport_club.settings'\n",
+            "Starting development server at http://127.0.0.1:8000/\n",
+            "Quit the server with CONTROL-C.\n",
+            "\n",
+            "\u001b[33;1mWARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.\n",
+            "For more information on production servers see: https://docs.djangoproject.com/en/6.0/howto/deployment/\u001b[0m\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/sport_club\n",
+        "!nohup python manage.py runserver 127.0.0.1:8000 &\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "eN21dvfYlK6g",
+        "outputId": "939443ef-bd3a-4bda-da2b-15cfa66d0240"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/sport_club\n",
+            "nohup: appending output to 'nohup.out'\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!curl http://127.0.0.1:8000/api/\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "p_yG52dDlQg2",
+        "outputId": "82bdc4a0-66f9-4ccf-b32b-7397bbaab627"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "<!DOCTYPE html>\n",
+            "<html lang=\"en\">\n",
+            "<head>\n",
+            "  <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n",
+            "  <title>Page not found at /api/</title>\n",
+            "  <meta name=\"robots\" content=\"NONE,NOARCHIVE\">\n",
+            "  <style>\n",
+            "    html * { padding:0; margin:0; }\n",
+            "    body * { padding:10px 20px; }\n",
+            "    body * * { padding:0; }\n",
+            "    body { font-family: sans-serif; background:#eee; color:#000; }\n",
+            "    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }\n",
+            "    h1 { font-weight:normal; margin-bottom:.4em; }\n",
+            "    h1 small { font-size:60%; color:#666; font-weight:normal; }\n",
+            "    table { border:none; border-collapse: collapse; width:100%; }\n",
+            "    td, th { vertical-align:top; padding:2px 3px; }\n",
+            "    th { width:12em; text-align:right; color:#666; padding-right:.5em; }\n",
+            "    #info { background:#f6f6f6; }\n",
+            "    #info ol { margin: 0.5em 4em; }\n",
+            "    #info ol li { font-family: monospace; }\n",
+            "    #summary { background: #ffc; }\n",
+            "    #explanation { background:#eee; border-bottom: 0px none; }\n",
+            "    pre.exception_value { font-family: sans-serif; color: #575757; font-size: 1.5em; margin: 10px 0 10px 0; }\n",
+            "  </style>\n",
+            "</head>\n",
+            "<body>\n",
+            "  <header id=\"summary\">\n",
+            "    <h1>Page not found <small>(404)</small></h1>\n",
+            "    \n",
+            "    <table class=\"meta\">\n",
+            "      <tr>\n",
+            "        <th scope=\"row\">Request Method:</th>\n",
+            "        <td>GET</td>\n",
+            "      </tr>\n",
+            "      <tr>\n",
+            "        <th scope=\"row\">Request URL:</th>\n",
+            "        <td>http://127.0.0.1:8000/api/</td>\n",
+            "      </tr>\n",
+            "      \n",
+            "    </table>\n",
+            "  </header>\n",
+            "\n",
+            "  <main id=\"info\">\n",
+            "    \n",
+            "      <p>\n",
+            "      Using the URLconf defined in <code>sport_club.urls</code>,\n",
+            "      Django tried these URL patterns, in this order:\n",
+            "      </p>\n",
+            "      <ol>\n",
+            "        \n",
+            "          <li>\n",
+            "            \n",
+            "              <code>\n",
+            "                admin/\n",
+            "                \n",
+            "              </code>\n",
+            "            \n",
+            "          </li>\n",
+            "        \n",
+            "      </ol>\n",
+            "      <p>\n",
+            "        \n",
+            "          The current path, <code>api/</code>,\n",
+            "        \n",
+            "        didn’t match any of these.\n",
+            "      </p>\n",
+            "    \n",
+            "  </main>\n",
+            "\n",
+            "  <footer id=\"explanation\">\n",
+            "    <p>\n",
+            "      You’re seeing this error because you have <code>DEBUG = True</code> in\n",
+            "      your Django settings file. Change that to <code>False</code>, and Django\n",
+            "      will display a standard 404 page.\n",
+            "    </p>\n",
+            "  </footer>\n",
+            "</body>\n",
+            "</html>\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!curl http://127.0.0.1:8000/api/users/\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sQ9LDrkylTWX",
+        "outputId": "dc3683df-0e1e-41bd-fed2-a3c1fdd80f51"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "<!DOCTYPE html>\n",
+            "<html lang=\"en\">\n",
+            "<head>\n",
+            "  <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n",
+            "  <title>Page not found at /api/users/</title>\n",
+            "  <meta name=\"robots\" content=\"NONE,NOARCHIVE\">\n",
+            "  <style>\n",
+            "    html * { padding:0; margin:0; }\n",
+            "    body * { padding:10px 20px; }\n",
+            "    body * * { padding:0; }\n",
+            "    body { font-family: sans-serif; background:#eee; color:#000; }\n",
+            "    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }\n",
+            "    h1 { font-weight:normal; margin-bottom:.4em; }\n",
+            "    h1 small { font-size:60%; color:#666; font-weight:normal; }\n",
+            "    table { border:none; border-collapse: collapse; width:100%; }\n",
+            "    td, th { vertical-align:top; padding:2px 3px; }\n",
+            "    th { width:12em; text-align:right; color:#666; padding-right:.5em; }\n",
+            "    #info { background:#f6f6f6; }\n",
+            "    #info ol { margin: 0.5em 4em; }\n",
+            "    #info ol li { font-family: monospace; }\n",
+            "    #summary { background: #ffc; }\n",
+            "    #explanation { background:#eee; border-bottom: 0px none; }\n",
+            "    pre.exception_value { font-family: sans-serif; color: #575757; font-size: 1.5em; margin: 10px 0 10px 0; }\n",
+            "  </style>\n",
+            "</head>\n",
+            "<body>\n",
+            "  <header id=\"summary\">\n",
+            "    <h1>Page not found <small>(404)</small></h1>\n",
+            "    \n",
+            "    <table class=\"meta\">\n",
+            "      <tr>\n",
+            "        <th scope=\"row\">Request Method:</th>\n",
+            "        <td>GET</td>\n",
+            "      </tr>\n",
+            "      <tr>\n",
+            "        <th scope=\"row\">Request URL:</th>\n",
+            "        <td>http://127.0.0.1:8000/api/users/</td>\n",
+            "      </tr>\n",
+            "      \n",
+            "    </table>\n",
+            "  </header>\n",
+            "\n",
+            "  <main id=\"info\">\n",
+            "    \n",
+            "      <p>\n",
+            "      Using the URLconf defined in <code>sport_club.urls</code>,\n",
+            "      Django tried these URL patterns, in this order:\n",
+            "      </p>\n",
+            "      <ol>\n",
+            "        \n",
+            "          <li>\n",
+            "            \n",
+            "              <code>\n",
+            "                admin/\n",
+            "                \n",
+            "              </code>\n",
+            "            \n",
+            "          </li>\n",
+            "        \n",
+            "      </ol>\n",
+            "      <p>\n",
+            "        \n",
+            "          The current path, <code>api/users/</code>,\n",
+            "        \n",
+            "        didn’t match any of these.\n",
+            "      </p>\n",
+            "    \n",
+            "  </main>\n",
+            "\n",
+            "  <footer id=\"explanation\">\n",
+            "    <p>\n",
+            "      You’re seeing this error because you have <code>DEBUG = True</code> in\n",
+            "      your Django settings file. Change that to <code>False</code>, and Django\n",
+            "      will display a standard 404 page.\n",
+            "    </p>\n",
+            "  </footer>\n",
+            "</body>\n",
+            "</html>\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!curl http://127.0.0.1:8000/api/trainers/\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "KmJHTvgilWLe",
+        "outputId": "9f26c838-2f94-48d5-b6d6-9b71f74c843f"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "<!DOCTYPE html>\n",
+            "<html lang=\"en\">\n",
+            "<head>\n",
+            "  <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n",
+            "  <title>Page not found at /api/trainers/</title>\n",
+            "  <meta name=\"robots\" content=\"NONE,NOARCHIVE\">\n",
+            "  <style>\n",
+            "    html * { padding:0; margin:0; }\n",
+            "    body * { padding:10px 20px; }\n",
+            "    body * * { padding:0; }\n",
+            "    body { font-family: sans-serif; background:#eee; color:#000; }\n",
+            "    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }\n",
+            "    h1 { font-weight:normal; margin-bottom:.4em; }\n",
+            "    h1 small { font-size:60%; color:#666; font-weight:normal; }\n",
+            "    table { border:none; border-collapse: collapse; width:100%; }\n",
+            "    td, th { vertical-align:top; padding:2px 3px; }\n",
+            "    th { width:12em; text-align:right; color:#666; padding-right:.5em; }\n",
+            "    #info { background:#f6f6f6; }\n",
+            "    #info ol { margin: 0.5em 4em; }\n",
+            "    #info ol li { font-family: monospace; }\n",
+            "    #summary { background: #ffc; }\n",
+            "    #explanation { background:#eee; border-bottom: 0px none; }\n",
+            "    pre.exception_value { font-family: sans-serif; color: #575757; font-size: 1.5em; margin: 10px 0 10px 0; }\n",
+            "  </style>\n",
+            "</head>\n",
+            "<body>\n",
+            "  <header id=\"summary\">\n",
+            "    <h1>Page not found <small>(404)</small></h1>\n",
+            "    \n",
+            "    <table class=\"meta\">\n",
+            "      <tr>\n",
+            "        <th scope=\"row\">Request Method:</th>\n",
+            "        <td>GET</td>\n",
+            "      </tr>\n",
+            "      <tr>\n",
+            "        <th scope=\"row\">Request URL:</th>\n",
+            "        <td>http://127.0.0.1:8000/api/trainers/</td>\n",
+            "      </tr>\n",
+            "      \n",
+            "    </table>\n",
+            "  </header>\n",
+            "\n",
+            "  <main id=\"info\">\n",
+            "    \n",
+            "      <p>\n",
+            "      Using the URLconf defined in <code>sport_club.urls</code>,\n",
+            "      Django tried these URL patterns, in this order:\n",
+            "      </p>\n",
+            "      <ol>\n",
+            "        \n",
+            "          <li>\n",
+            "            \n",
+            "              <code>\n",
+            "                admin/\n",
+            "                \n",
+            "              </code>\n",
+            "            \n",
+            "          </li>\n",
+            "        \n",
+            "      </ol>\n",
+            "      <p>\n",
+            "        \n",
+            "          The current path, <code>api/trainers/</code>,\n",
+            "        \n",
+            "        didn’t match any of these.\n",
+            "      </p>\n",
+            "    \n",
+            "  </main>\n",
+            "\n",
+            "  <footer id=\"explanation\">\n",
+            "    <p>\n",
+            "      You’re seeing this error because you have <code>DEBUG = True</code> in\n",
+            "      your Django settings file. Change that to <code>False</code>, and Django\n",
+            "      will display a standard 404 page.\n",
+            "    </p>\n",
+            "  </footer>\n",
+            "</body>\n",
+            "</html>\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "%cd /content/sport_club\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "KcVVc4wxmTkc",
+        "outputId": "12c2d3cc-3fca-4c97-b86e-357c5e647a65"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "/content/sport_club\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!nohup python manage.py runserver 127.0.0.1:8000 &\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "6mhSSuO3mZZg",
+        "outputId": "8c258c32-1010-45e1-b1fe-2de6485e7636"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "nohup: appending output to 'nohup.out'\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!curl http://127.0.0.1:8000/api/\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "HhoX05JfmeCX",
+        "outputId": "48b7196e-a42a-4d3c-8287-daf0fb57ceb5"
+      },
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "<!DOCTYPE html>\n",
+            "<html lang=\"en\">\n",
+            "<head>\n",
+            "  <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n",
+            "  <title>Page not found at /api/</title>\n",
+            "  <meta name=\"robots\" content=\"NONE,NOARCHIVE\">\n",
+            "  <style>\n",
+            "    html * { padding:0; margin:0; }\n",
+            "    body * { padding:10px 20px; }\n",
+            "    body * * { padding:0; }\n",
+            "    body { font-family: sans-serif; background:#eee; color:#000; }\n",
+            "    body > :where(header, main, footer) { border-bottom:1px solid #ddd; }\n",
+            "    h1 { font-weight:normal; margin-bottom:.4em; }\n",
+            "    h1 small { font-size:60%; color:#666; font-weight:normal; }\n",
+            "    table { border:none; border-collapse: collapse; width:100%; }\n",
+            "    td, th { vertical-align:top; padding:2px 3px; }\n",
+            "    th { width:12em; text-align:right; color:#666; padding-right:.5em; }\n",
+            "    #info { background:#f6f6f6; }\n",
+            "    #info ol { margin: 0.5em 4em; }\n",
+            "    #info ol li { font-family: monospace; }\n",
+            "    #summary { background: #ffc; }\n",
+            "    #explanation { background:#eee; border-bottom: 0px none; }\n",
+            "    pre.exception_value { font-family: sans-serif; color: #575757; font-size: 1.5em; margin: 10px 0 10px 0; }\n",
+            "  </style>\n",
+            "</head>\n",
+            "<body>\n",
+            "  <header id=\"summary\">\n",
+            "    <h1>Page not found <small>(404)</small></h1>\n",
+            "    \n",
+            "    <table class=\"meta\">\n",
+            "      <tr>\n",
+            "        <th scope=\"row\">Request Method:</th>\n",
+            "        <td>GET</td>\n",
+            "      </tr>\n",
+            "      <tr>\n",
+            "        <th scope=\"row\">Request URL:</th>\n",
+            "        <td>http://127.0.0.1:8000/api/</td>\n",
+            "      </tr>\n",
+            "      \n",
+            "    </table>\n",
+            "  </header>\n",
+            "\n",
+            "  <main id=\"info\">\n",
+            "    \n",
+            "      <p>\n",
+            "      Using the URLconf defined in <code>sport_club.urls</code>,\n",
+            "      Django tried these URL patterns, in this order:\n",
+            "      </p>\n",
+            "      <ol>\n",
+            "        \n",
+            "          <li>\n",
+            "            \n",
+            "              <code>\n",
+            "                admin/\n",
+            "                \n",
+            "              </code>\n",
+            "            \n",
+            "          </li>\n",
+            "        \n",
+            "      </ol>\n",
+            "      <p>\n",
+            "        \n",
+            "          The current path, <code>api/</code>,\n",
+            "        \n",
+            "        didn’t match any of these.\n",
+            "      </p>\n",
+            "    \n",
+            "  </main>\n",
+            "\n",
+            "  <footer id=\"explanation\">\n",
+            "    <p>\n",
+            "      You’re seeing this error because you have <code>DEBUG = True</code> in\n",
+            "      your Django settings file. Change that to <code>False</code>, and Django\n",
+            "      will display a standard 404 page.\n",
+            "    </p>\n",
+            "  </footer>\n",
+            "</body>\n",
+            "</html>\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
